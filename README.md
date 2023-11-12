@@ -20,8 +20,8 @@ Este comando sirve para ejecutar pruebas automaticas con los archivos contenidos
 
 Este comando contrendra las siguientes flags las cuales se usan para mostrar la solución dadas las diferentes aproximaciones:
 
-        1.  -l Para observar pruebas en volumen usando programación lineal
-        2.  -g Para observar pruebas en volumen mediante la aproximación greedy
+        1.  auto_lineal Para observar pruebas en volumen usando programación lineal
+        2.  auto_greedy Para observar pruebas en volumen mediante la aproximación greedy
 
 --- 
 
@@ -31,8 +31,8 @@ Dicho comando ejecuta la solución mostrando por pantalla el resultado de la eje
 
 El comando tiene las siguientes flags:
 
-        1. -l Ejecuta la versión por programación lineal
-        2. -g Ejecuta la versión greedy 
+        1. exec_lineal Ejecuta la versión por programación lineal
+        2. exec_greedy Ejecuta la versión greedy 
 
 ---
 
