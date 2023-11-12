@@ -9,33 +9,21 @@ EXECUTE_GREEDY = "exec_greedy"
 CLOSE = "close\n"
 
 def auto_test_backtracking(test_files, result_files):
-    print("Paso por aca 1")
-    print(test_files, result_files)
     return
 
 def auto_test_lineal_programming(test_files, result_files):
-    print("Paso por aca 2")
-    print(test_files, result_files)
     return
 
 def auto_test_lineal_greedy(test_files, result_files):
-    print("Paso por aca 3")
-    print(test_files, result_files)
     return
 
 def execute_backtracking(file_name, extra):
-    print("Paso por aca 4")
-    print(file_name, extra)
     return
 
 def execute_lineal_programming(file_name, extra):
-    print("Paso por aca 5")
-    print(file_name, extra)
     return
 
 def execute_greedy(file_name, extra):
-    print("Paso por aca 6")
-    print(file_name, extra)
     return
 
 def show_input_error():
@@ -57,7 +45,6 @@ MAP = {
     EXECUTE_LINEAL: execute_lineal_programming, 
     EXECUTE_GREEDY: execute_greedy,
 }
-
 
 def program_execution():
     try:
