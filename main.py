@@ -1,5 +1,7 @@
+from program import program_execution
+
 def main():
-    print("Hola")
+    program_execution()
     return
 
 if __name__ == "__main__":
