@@ -33,3 +33,9 @@ El comando tiene las siguientes flags:
 
         1. -l Ejecuta la versión por programación lineal
         2. -g Ejecuta la versión greedy 
+
+---
+
+        close 
+
+Termina la ejecución del programa 
