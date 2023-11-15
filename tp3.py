@@ -14,8 +14,6 @@ def is_solution(hitting_set, subsets):
 
 def _search_for_min_hitting_set(set,subsets, best_sol, act_sol): 
 
-    print(best_sol)
-
     if len(act_sol) > len(set):
         return
 
