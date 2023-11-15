@@ -31,9 +31,8 @@ def auto_test_lineal_greedy(test_files, result_files):
     return
 
 def execute_backtracking(file_name, extra):
-    subconjuntos = read_data_file(file_name)
-    print(subconjuntos)
-    resultado = tp3.search_for_min_hitting_set(subconjuntos)
+    subsets, a = read_data_file(file_name)
+    resultado = tp3.search_for_min_hitting_set(subsets, a)
     return resultado
 
 def execute_lineal_programming(file_name, extra):

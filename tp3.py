@@ -1,23 +1,32 @@
 import grafo
 
-def search_for_min_hitting_set(subconjuntos):
-    _search_for_min_hitting_set(subconjuntos, [], [], subconjuntos)
+def search_for_min_hitting_set(subsets, set):
+    _search_for_min_hitting_set(set, subsets, [], [], subsets)
     return
 
-def _search_for_min_hitting_set(subconjuntos, mejor_sol, sol_act, conjuntos_no_cubiertos):
+def is_solution(hitting_set, subsets):
+    for subset in subsets:
+        flag = False
+        for element in subset:
+            if element in hitting_set: continue
+        if not flag: return False 
+    return True
 
-    if len(conjuntos_no_cubiertos) == 0:
-        return sol_act 
-    
-    if len(mejor_sol) < len(sol_act):
+def _search_for_min_hitting_set(set,subsets, best_sol, act_sol):
+
+    if is_solution(act_sol, subsets) and len(act_sol) < len(best_sol):
+        best_sol = act_sol[:]
+
+    if not is_solution(act_sol, subsets) and len(act_sol) >= len(best_sol):
         return 
+    
+    for element in set:
+        if element in act_sol: continue
+        act_sol.append(element)
+        _search_for_min_hitting_set(set, subsets, best_sol, act_sol)
+        act_sol.pop()
 
-    # selecciono algun elemento de a
-
-    #_search_for_min_hitting_set(subconjuntos, mejor_sol, sol_act.add(nuevo_elemento), conjuntos_no_cubiertos.elimino_los_que_tengan(nuevo_elemento))
-
-    return
-
+    return best_sol
 
         
             
