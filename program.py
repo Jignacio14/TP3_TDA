@@ -62,14 +62,11 @@ MAP = {
 }
 
 def program_execution():
-    try:
-        for line in sys.stdin:
-            if line == CLOSE:
-                print("Adios")
-                break
-            datos = line.strip("\n").split(" ")
-            result = execute_backtracking("15.txt", None)
-            print(result)
-            #MAP.get(datos[0], show_input_error())(datos[1])
-    except (ValueError, TypeError) as e:
-        show_input_error()
+    for line in sys.stdin:
+        if line == CLOSE:
+            print("Adios")
+            break
+        # datos = line.strip("\n").split(" ")
+        result = execute_backtracking("15.txt", None)
+        print(result)
+        #MAP.get(datos[0], show_input_error())(datos[1])
