@@ -1,5 +1,7 @@
-def search_for_min_hitting_set(subconjuntos):
+import grafo
 
+def search_for_min_hitting_set(subconjuntos):
+    _search_for_min_hitting_set(subconjuntos, [], [], subconjuntos)
     return
 
 def _search_for_min_hitting_set(subconjuntos, mejor_sol, sol_act, conjuntos_no_cubiertos):
@@ -12,6 +14,11 @@ def _search_for_min_hitting_set(subconjuntos, mejor_sol, sol_act, conjuntos_no_c
 
     # selecciono algun elemento de a
 
-    _search_for_min_hitting_set(subconjuntos, mejor_sol, sol_act.add(nuevo_elemento), conjuntos_no_cubiertos.elimino_los_que_tengan(nuevo_elemento))
+    #_search_for_min_hitting_set(subconjuntos, mejor_sol, sol_act.add(nuevo_elemento), conjuntos_no_cubiertos.elimino_los_que_tengan(nuevo_elemento))
 
     return
+
+
+        
+            
+        

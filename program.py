@@ -11,11 +11,15 @@ CLOSE = "close\n"
 
 def read_data_file(file):
     subconjuntos = []
+    a = set()
     with open(file) as origen:
         for linea in origen:
-            nuevo_subconjunto = set().update(linea.split(","))
+            datos = linea.strip("\n").split(",")
+            nuevo_subconjunto = set()
+            nuevo_subconjunto.update(datos)
+            a.update(datos)
             subconjuntos.append(nuevo_subconjunto)
-    return subconjuntos
+    return subconjuntos, a
 
 def auto_test_backtracking(test_files, result_files):
     return
@@ -28,8 +32,9 @@ def auto_test_lineal_greedy(test_files, result_files):
 
 def execute_backtracking(file_name, extra):
     subconjuntos = read_data_file(file_name)
-    resultado, k_min = tp3.search_for_min_hitting_set(subconjuntos)
-    return resultado, k_min
+    print(subconjuntos)
+    resultado = tp3.search_for_min_hitting_set(subconjuntos)
+    return resultado
 
 def execute_lineal_programming(file_name, extra):
     return
