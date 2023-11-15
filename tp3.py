@@ -40,7 +40,3 @@ def _search_for_min_hitting_set(set,subsets, best_sol, act_sol):
 
     
     return best_sol
-
-        
-            
-        
