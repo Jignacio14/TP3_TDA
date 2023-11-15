@@ -1,0 +1,62 @@
+\section{Construyendo la ecuación de recurrencia *}
+
+Analicemos como se comporta el problema en un principio, la solución trivial de este problema seria basicamente pensar que si no debo entrenar entonces mi ganancia es 0 y esto se puede expresar como:
+
+- El optimo de $E_0$ (que en otras palabras es $\empty$) es 0 , asumiendo también que la energia que se tiene disponible es $S_0 = \empty$, expresado en terminos de una ecuación de recurrencia esto seria $T(E_0, S_0) = 0$
+
+Ahora teniendo tan solo un entrenamiento se debe considerar claramente tambien la energia para ese día de entrenamiento: 
+
+- Esto lo podemos resumir en terminos de la función esfuerzo como $T(E_1, S_1) = esfuerzo(E_1, S_1)$
+
+Ahora si se tienen dos días se puede decir algo similar a lo anterior, pero en este caso vale observar algunas cosas que son intesantes, en este caso se tienen tan solo dos posibilidades:
+
+- La primera es que se entrena solo el segundo dìa porque la ganancia es superior a la suma de entrenar ambos dias $T(E_2, S_1) = esfuerzo(E_2, S_1)$
+- La segunda es se entrenan ambos dias, lo cual en terminos de la función esfuerzo es: $T(E_2, S_2) = esfuerzo(E_2, S_2) + esfuerzo(E_1, S_1)$
+
+Es importante observar que teniendo dos elementos nunca va a ser conveniente dejar de entrenar el ultimo día, puesto que no importa que tan grande sea el esfuerzo del primer día siempre con la energía restante conviene hacer un entrenamiento pues este sumara alguna ganancia más (a menos que la energia restante sea 0)
+
+Por otro lado, que pasa si debo considerar 3 días, se puede observar que es necesario obtener el maximo entre estas 3 posibilidades:
+ 
+
+$$
+\begin{align*}
+&\text{Entreno el primer y tercer día: } esfuerzo(E_3, S_1) + esfuerzo(E_1, S_1) \\
+&\text{Entreno el segundo día y el tercero: } esfuerzo(E_3, S_2) + esfuerzo(E_2, S_1) \\
+&\text{Entreno los 3 días: } esfuerzo(E_3, S_3) + esfuerzo(E_2, S_2) + esfuerzo(E_1, S_1) \\
+\end{align*}
+$$
+
+En el caso de tener 4 dias de entrenamiendo se debe considerar los mismos casos que ocurren en el analisis de tener 3 elementos, pero esta vez se agregan a todos el entrenamiento del cuarto dia con la energia correspondiente, segun lo determina la funcion de esfuerzo, a su vez, también añadir la posibilidad de no entrenar el tercer dia y entrenar tan solo el segundo y cuarto dia con las energias renovadas, entonces se consiguen las siguientes posibilidades para el entrenamiento:
+
+$$
+\begin{align*}
+&\text{Entreno el primero, el tercero y el cuarto } \rightarrow esfuerzo(E_1, S_1) + esfuerzo(E_3, S_1) + esfuerzo(E_4, S_2)\\
+&\text{Entreno el segundo, el tercero y el cuarto } \rightarrow esfuerzo(E_2, S_1) + esfuerzo(E_3, S_2) + esfuerzo(E_4, S_3)\\
+&\text{Entreno los 4 días de corrido } \rightarrow esfuerzo(E_1, S_1) + esfuerzo(E_2, S_2) + esfuerzo(E_3, S_3) + esfuerzo(E_4, S_4)\\
+&\text{Entreno el primero, el segundo y el cuarto } \rightarrow esfuerzo(E_1, S_1) + esfuerzo(E_2, S_2) + esfuerzo(E_4, S_1)\\
+&\text{Entreno el segundo y el cuarto } \rightarrow esfuerzo(E_2, S_1)+ esfuerzo(E_4, S_1)\\
+\end{align*}
+$$
+
+Observar que en el ejemplo anterior se construyen las respuestas agregando la extensión correspondiente al cuarto día y la cuarta posibilidad corresponde a la que se agrega por la extensión del tamaño de la entrada
+
+De esta manera y viendo como se van construyendo las respuestas, se puede construir una generalización mediante una ecuación de recurrencia que abarque todas las posibilidades, dicha ecuación viene dada de la siguiente manera:
+
+$$
+\\
+T(E_i, S_j) = max\begin{cases}
+  T(E_{i-2}, S_{j-2}) + esfuerzo(E_{i}, S_1) \\
+  T(E_{i-1}, S_{j-1}) + esfuerzo(E_i,S_j) \\
+  T(E_i, S_{j-1})                                          
+\end{cases} 
+\\
+$$
+
+Esto claro, considerando los casos base:
+
+$$
+T(E_1, S_1) = esfuerzo(E_1, S_1) \\
+T(E_2, S_1) = esfuerzo(E_2, S_1) \\ 
+T(E_2, S_2) = esfuerzo(E_2, S_2) + esfuerzo(E_1, S_1)\\
+\text{si } i \ o \ j \le 0 \rightarrow T(E_i, S_j) = 0
+$$
