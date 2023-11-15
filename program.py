@@ -67,6 +67,6 @@ def program_execution():
             print("Adios")
             break
         # datos = line.strip("\n").split(" ")
-        result = execute_backtracking("15.txt", None)
+        result = execute_backtracking("10_todos.txt", None)
         print(result)
         #MAP.get(datos[0], show_input_error())(datos[1])

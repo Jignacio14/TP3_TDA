@@ -20,8 +20,6 @@ def has_a_player(subset, act_sol):
 
 def _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub): 
 
-    print(best_sol)
-
     if is_solution(act_sol, subsets) and (len(best_sol) == 0 or len(act_sol) < len(best_sol)):
         best_sol = act_sol[:]
         return best_sol
