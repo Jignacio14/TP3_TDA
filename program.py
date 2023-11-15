@@ -67,8 +67,9 @@ def program_execution():
             if line == CLOSE:
                 print("Adios")
                 break
-            command, data = line.strip().split(" ", 1)
-            file_one, file_two = prepare_data(data)
-            MAP.get(command, show_input_error())(file_one, file_two)
+            datos = line.strip("\n").split(" ")
+            result = execute_backtracking("15.txt", None)
+            print(result)
+            #MAP.get(datos[0], show_input_error())(datos[1])
     except (ValueError, TypeError) as e:
         show_input_error()
