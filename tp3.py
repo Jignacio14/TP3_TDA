@@ -42,10 +42,7 @@ def _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub):
 
     return best_sol
 
-def search_hs_linealp(subsets, set):    
-    return _search_hs_linealp(subsets, set)
-
-def _search_hs_linealp(subsets, set):
+def search_hs_linealp(subsets, set):
 
     dict_variables = {elem: pulp.LpVariable(f"{elem}", cat="Binary") for idx, elem in enumerate(set)}
 
@@ -59,6 +56,6 @@ def _search_hs_linealp(subsets, set):
 
     hitting_set_solution = {var.name for var in dict_variables.values() if pulp.value(var) == 1}
 
-    return hitting_set_solution, len(hitting_set_solution)
+    return hitting_set_solution
 
 
