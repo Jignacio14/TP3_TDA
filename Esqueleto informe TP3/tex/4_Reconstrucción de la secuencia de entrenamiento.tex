@@ -1,0 +1,11 @@
+\section{Reconstrucción de la secuencia de entrenamiento *}
+
+Observemos el codigo solución del problema y observemos que ocurre en una fila cualquiera de la matriz del espacio de solución. Supongamos que tenemos lo siguiente:
+
+        [67, 70, 72, 72, 80, 0, 0]
+
+El maximo de este arreglo, el cual seria la respuesta que estamos buscando aparece por primera vez en la posicion 4 del vector ejemplo, se sabe que para obtener el optimo en esa posición dado el codigo anteriormente generado y obviamente la ecuación de recurrencia, debo analizar el maximo entre haber entrenado hasta ese dia en particular y haber descansado y arrancar a entrenar ese dia. Eso quiere decir entonces que para el día 5 debo haber entrenado de corrido 5 días
+
+Dado el ejemplo anterior, se puede concluir que como el maximo aparece por primera vez en una posicion k de un vector cualquiera, necesariamente debo haber entrenado de corrido hasta ese punto k + 1 días seguidos y evidentemente haber descansado antes de eso $(\text{asumiendo k}  + 1 < n)$.
+
+Ahora para saber que ocurrio nuevamenta en el o los segmentos que faltan por analizar, asumiento que $k + 1 < n$ siendo n el total de días a entrenar, bastaria con aplicar el mismo algoritmo en la fila $n - (k + 1)$, haciendo en todo caso la verificación si vale agregar un "descanso" debido a que podemos agregar un descanso innesario al inicio de la secuencia. 
