@@ -47,23 +47,18 @@ def search_hs_linealp(subsets, set):
 
 def _search_hs_linealp(subsets, set):
 
-    aux = list(set)
-    y = []
-    dict_variables = {}
+    dict_variables = {elem: pulp.LpVariable(f"{elem}", cat="Binary") for idx, elem in enumerate(set)}
 
-    for i in range(len(aux)):
-        y.append(pulp.LpVariable("x" + str(i), cat="Binary"))
-        dict_variables[aux[i]] = "x" + str(i)
-    
     problem = pulp.LpProblem("hitting_set_problem", pulp.LpMinimize)
 
     for subset in subsets:
-        variables = []
-        for elem in subset:
-            variables.append(dict_variables[elem])
-        problem += pulp.LpAffineExpression(variables) >= 1
+        problem += pulp.lpSum(dict_variables[elem] for elem in subset) >= 1
 
+    pulp.LpSolverDefault.msg = 0
     problem.solve()
-    return list(map(lambda xi: pulp.value(xi), y))
+
+    hitting_set_solution = {var.name for var in dict_variables.values() if pulp.value(var) == 1}
+
+    return hitting_set_solution, len(hitting_set_solution)
 
 
