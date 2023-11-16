@@ -36,7 +36,9 @@ def execute_backtracking(file_name, extra):
     return resultado
 
 def execute_lineal_programming(file_name, extra):
-    return
+    subsets, a = read_data_file(file_name)
+    resultado = tp3.search_hs_linealp(subsets, a)
+    return resultado
 
 def execute_greedy(file_name, extra):
     return
@@ -67,6 +69,6 @@ def program_execution():
             print("Adios")
             break
         # datos = line.strip("\n").split(" ")
-        result = execute_backtracking("10_todos.txt", None)
+        result = execute_lineal_programming("10_todos.txt", None)
         print(result)
         #MAP.get(datos[0], show_input_error())(datos[1])
