@@ -69,6 +69,6 @@ def program_execution():
             print("Adios")
             break
         # datos = line.strip("\n").split(" ")
-        result = execute_lineal_programming("10_todos.txt", None)
+        result = execute_lineal_programming("15.txt", None)
         print(result)
         #MAP.get(datos[0], show_input_error())(datos[1])

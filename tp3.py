@@ -51,6 +51,8 @@ def search_hs_linealp(subsets, set):
     for subset in subsets:
         problem += pulp.lpSum(dict_variables[elem] for elem in subset) >= 1
 
+    problem += pulp.lpSum(dict_variables[elem] for elem in set)
+
     pulp.LpSolverDefault.msg = 0
     problem.solve()
 
