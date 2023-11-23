@@ -1,6 +1,7 @@
 import sys
 import os
 import tp3
+import time
 
 LECTURA = 'r'
 PREFIX = "resultado_"
@@ -111,8 +112,11 @@ def program_execution():
             print("Bye bye")
             break
         data = line.strip("\n").split(" ")
-        command = data[0] 
+        command = data[0]
+        tiempo_i = time.time()
         MAP.get(command, show_input_error)(data[1:])
+        tiempo_f = time.time()
+        print(f"El tiempo de ejecucion fue de: {tiempo_f - tiempo_i} segundos")
 
 
 

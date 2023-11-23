@@ -1,7 +1,7 @@
 import pulp
 
 def search_for_min_hitting_set(subsets, a):
-    return  _search_for_min_hitting_set(subsets, [], [], 0)
+    return  _search_for_min_hitting_set(subsets, set(), set(), 0, set())
 
 def is_solution(hitting_set, subsets):
     for subset in subsets:
@@ -20,25 +20,33 @@ def has_a_player(subset, act_sol):
     return False
 
 
-def _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub): 
+def _search_for_min_hitting_set(subsets: list, best_sol: set, act_sol: set, act_sub: int, used_players: set): 
 
-    if is_solution(act_sol, subsets) and (len(best_sol) == 0 or len(act_sol) < len(best_sol)):
-        best_sol = act_sol[:]
-        return best_sol
-    
-    if len(best_sol) > 0 and len(act_sol) > len(best_sol) and not is_solution(act_sol, subsets):
+    if len(best_sol) > 0 and len(act_sol) > len(best_sol): 
         return best_sol
 
+    if (len(best_sol) == 0 or len(act_sol) < len(best_sol)) and is_solution(act_sol, subsets):
+        best_sol = act_sol.copy()
+        return best_sol
+        
     if act_sub > len(subsets) - 1: 
         return best_sol
 
     if has_a_player(subsets[act_sub], act_sol):
-        return _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1)
+        return _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1, used_players)
     
+    selected_players = set()
+
     for player in subsets[act_sub]:
-        act_sol.append(player)
-        best_sol = _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1)
-        act_sol.pop()
+        if player in used_players: 
+            continue
+        act_sol.add(player)
+        selected_players.add(player)
+        used_players.add(player)
+        best_sol = _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1, used_players)
+        act_sol.remove(player)
+
+    used_players.difference_update(selected_players)
     return best_sol
 
 def search_hs_linealp(subsets, set):
