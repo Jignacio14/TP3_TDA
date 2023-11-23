@@ -19,10 +19,9 @@ def has_a_player(subset, act_sol):
     return False
 
 
-def _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub, visited): 
+def _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub): 
 
     if is_solution(act_sol, subsets) and (len(best_sol) == 0 or len(act_sol) < len(best_sol)):
-        visited.add(act_sub)
         best_sol = act_sol[:]
         return best_sol
     
@@ -33,11 +32,11 @@ def _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub, visited):
         return best_sol
 
     if has_a_player(subsets[act_sub], act_sol):
-        return _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1, visited)
+        return _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1)
 
     for player in subsets[act_sub]:
         act_sol.append(player)
-        best_sol = _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1, visited)
+        best_sol = _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1)
         act_sol.pop()
 
     return best_sol
