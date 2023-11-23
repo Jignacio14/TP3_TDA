@@ -28,7 +28,7 @@ def read_data_file(file):
             subconjuntos.append(nuevo_subconjunto)
     return subconjuntos, a
 
-def auto_test_backtracking(test_files_path, result_files_path):
+def _auto_test_volumn(test_files_path, result_files_path, function, flag = True):
     result_files_path = result_files_path + "/"
     test_files_path = test_files_path + "/"
 
@@ -56,7 +56,11 @@ def auto_test_backtracking(test_files_path, result_files_path):
         print(result)
         print(GREEN, "TODO OK", RESET, end="\n\n")
 
-def _auto_test_volumn(test_files, result_files, function):
+def auto_test_backtracking(files: list):
+    if not os.path.exists(files[0]) or not os.path.exists(files[1]):
+        print("Alguna de las rutas no es valida")
+        return 
+    _auto_test_volumn(files[0], files[1], tp3.search_for_min_hitting_set)
     return
 
 def auto_test_lineal_programming(files: list):
@@ -67,10 +71,6 @@ def auto_test_lineal_programming(files: list):
     return
 
 def auto_test_lineal_greedy(files: list):
-    if not os.path.exists(files[0]) or not os.path.exists(files[1]):
-        print("Alguna de las rutas no es valida")
-        return 
-    _auto_test_volumn(files[0], files[1], tp3.search_for_min_hitting_set)
     return
 
 def execute_backtracking(file_name: list):
@@ -107,16 +107,19 @@ MAP = {
 }
 
 def program_execution():
-    for line in sys.stdin:
-        if line == CLOSE:
-            print("Bye bye")
-            break
-        data = line.strip("\n").split(" ")
-        command = data[0]
-        tiempo_i = time.time()
-        MAP.get(command, show_input_error)(data[1:])
-        tiempo_f = time.time()
-        print(f"El tiempo de ejecucion fue de: {tiempo_f - tiempo_i} segundos")
+    try:
+        for line in sys.stdin:
+            if line == CLOSE:
+                print("Bye bye")
+                break
+            data = line.strip("\n").split(" ")
+            command = data[0]
+            tiempo_i = time.time()
+            MAP.get(command, show_input_error)(data[1:])
+            tiempo_f = time.time()
+            print(f"El tiempo de ejecucion fue de {tiempo_f - tiempo_i} segundos")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
 
 
 

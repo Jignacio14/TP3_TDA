@@ -25,10 +25,10 @@ def _search_for_min_hitting_set(subsets: list, best_sol: set, act_sol: set, act_
     if len(best_sol) > 0 and len(act_sol) > len(best_sol): 
         return best_sol
 
-    if (len(best_sol) == 0 or len(act_sol) < len(best_sol)) and is_solution(act_sol, subsets):
+    if act_sub == len(subsets) - 1 and (len(best_sol) == 0 or len(act_sol) < len(best_sol)) and is_solution(act_sol, subsets):
         best_sol = act_sol.copy()
         return best_sol
-        
+    
     if act_sub > len(subsets) - 1: 
         return best_sol
 
