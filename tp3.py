@@ -1,7 +1,7 @@
 import pulp
 
 def search_for_min_hitting_set(subsets, a):
-    return  _search_for_min_hitting_set(subsets, [], [], 0, set())
+    return  _search_for_min_hitting_set(subsets, [], [], 0)
 
 def is_solution(hitting_set, subsets):
     for subset in subsets:
@@ -10,7 +10,8 @@ def is_solution(hitting_set, subsets):
             if element in hitting_set: 
                 flag = True
                 break
-    return flag
+    if not flag: return False 
+    return True
 
 def has_a_player(subset, act_sol):
     for player in subset:
@@ -33,7 +34,7 @@ def _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub):
 
     if has_a_player(subsets[act_sub], act_sol):
         return _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1)
-
+    
     for player in subsets[act_sub]:
         act_sol.append(player)
         best_sol = _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1)
