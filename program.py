@@ -108,7 +108,7 @@ MAP = {
 def program_execution():
     for line in sys.stdin:
         if line == CLOSE:
-            print("Adios")
+            print("Bye bye")
             break
         data = line.strip("\n").split(" ")
         command = data[0] 

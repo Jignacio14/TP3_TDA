@@ -10,7 +10,7 @@ def is_solution(hitting_set, subsets):
             if element in hitting_set: 
                 flag = True
                 break
-    if not flag: return False 
+        if not flag: return False 
     return True
 
 def has_a_player(subset, act_sol):
@@ -39,7 +39,6 @@ def _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub):
         act_sol.append(player)
         best_sol = _search_for_min_hitting_set(subsets, best_sol, act_sol, act_sub + 1)
         act_sol.pop()
-
     return best_sol
 
 def search_hs_linealp(subsets, set):
