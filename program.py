@@ -114,10 +114,7 @@ def program_execution():
                 break
             data = line.strip("\n").split(" ")
             command = data[0]
-            tiempo_i = time.time()
             MAP.get(command, show_input_error)(data[1:])
-            tiempo_f = time.time()
-            print(f"El tiempo de ejecucion fue de {tiempo_f - tiempo_i} segundos")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
