@@ -95,3 +95,6 @@ Sea $G$ un grafo, $V$ su conjunto de vertices y $E$ su conjunto de aristas, ento
 
 Habiendo establecido lo anterior, se puede observar que si existe un Hitting Set de tamaño k  para los conjuntos $A = V(G)$ y $B = E(G)$ entonces necesariamente existe un vertex cover de tamaño al menos k, por lo tanto, sabiendo que vertex cover es un problema NP-Completo se puede concluir finalmente que Hitting set también es NP-Completo 
 
+$
+\min \left( \sum_{i \in C}^{|C|} C_{i} \right)
+$
