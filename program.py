@@ -1,7 +1,6 @@
 import sys
 import os
 import tp3
-import time
 
 LECTURA = 'r'
 PREFIX = "resultado_"
@@ -12,7 +11,6 @@ AUTO_TEST = "auto"
 EXECUTE = "exec"
 AUTO_TEST_LINEAL = "auto_lineal"
 EXECUTE_LINEAL = "exec_lineal"
-AUTO_TEST_GREEDY = "auto_greedy"
 EXECUTE_GREEDY = "exec_greedy"
 EXEC_LINEALC = "exec_linealc"
 CLOSE = "close\n"
@@ -108,7 +106,6 @@ def prepare_data(data):
 MAP = {
     AUTO_TEST: auto_test_backtracking, 
     AUTO_TEST_LINEAL: auto_test_lineal_programming,
-    AUTO_TEST_GREEDY: auto_test_lineal_greedy,
     EXECUTE: execute_backtracking,
     EXECUTE_LINEAL: execute_lineal_programming, 
     EXECUTE_GREEDY: execute_greedy,
