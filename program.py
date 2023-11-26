@@ -89,7 +89,9 @@ def execute_continous_lineal_programming(file_name: list):
     print(tp3.aprox_hs_by_contlp(subsets, a))
     return
 
-def execute_greedy(file_name,):
+def execute_greedy(file_name: list):
+    subsets, a = read_data_file(file_name[0])
+    print(tp3.aprox_greedy(subsets, a))
     return
 
 def show_input_error():
