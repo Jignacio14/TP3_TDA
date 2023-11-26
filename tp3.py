@@ -86,23 +86,25 @@ def aprox_hs_by_contlp(subsets, set):
 
 def aprox_greedy(subsets, a):
     aprox_sol = set()
-    missing_sets = {range(len(subsets))}
+    missing_sets = set(range(len(subsets)))
     subsets = list(subsets)
     return _aprox_greedy(subsets, aprox_sol, missing_sets)
 
 def _aprox_greedy(subsets, aprox_sol, missing_sets):
     while(not is_solution(aprox_sol, subsets)):
+        diference = set()
         player = find_most_frequent_player(missing_sets, subsets)
         for i in missing_sets: 
             if has_a_player(subsets[i], player):
-                missing_sets.remove(i)
+                diference.add(i)
         aprox_sol.add(player)
+        missing_sets.difference_update(diference)
     return aprox_sol
 
 def find_most_frequent_player(missing_sets, subsets):
     frequency = dict()
-    for subset in missing_sets:
-        for player in subsets[subset]:
+    for subset_index in missing_sets:
+        for player in subsets[subset_index]:
             frequency[player] = frequency.get(player, 0) + 1
     most_frequent_player = max(frequency, key=frequency.get)
     return most_frequent_player
