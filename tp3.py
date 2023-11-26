@@ -50,35 +50,59 @@ def _search_for_min_hitting_set(subsets: list, best_sol: set, act_sol: set, act_
     return best_sol
 
 def search_hs_linealp(subsets, set):
-    dict_variables = {elem: pulp.LpVariable(f"{elem}", cat="Binary") for elem in set}
+    players = {player: pulp.LpVariable(f"{player}", cat=pulp.LpBinary) for player in set}
 
     problem = pulp.LpProblem("hitting_set_problem", pulp.LpMinimize)
-    problem += pulp.lpSum(dict_variables[elem] for elem in set)
+    problem += pulp.lpSum(players[player] for player in set)
     for subset in subsets:
-        problem += pulp.lpSum(dict_variables[elem] for elem in subset) >= 1
+        problem += pulp.lpSum(players[player] for player in subset) >= 1
     
     pulp.LpSolverDefault.msg = 0
     problem.solve()
     
-    hitting_set_solution = {var.name for var in dict_variables.values() if pulp.value(var) == 1}
+    hitting_set_solution = {player.name for player in players.values() if pulp.value(player) == 1}
     return hitting_set_solution
 
 
 def _aprox_hs_by_contlp(subsets, set, b):
-    dict_variables = {elem: pulp.LpVariable(f"{elem}", cat="Continous") for elem in set}
+    players = {player: pulp.LpVariable(f"{player}", cat=pulp.LpContinuous) for player in set}
 
-    problem = pulp.LpProblem("hitting_set_problem", pulp.LpMinimize)
-    problem += pulp.lpSum(dict_variables[elem] for elem in set)
+    problem = pulp.LpProblem("hitting_set_problem_c", pulp.LpMinimize)
+    problem += pulp.lpSum(players[player] for player in set)
     for subset in subsets:
-        problem += pulp.lpSum(dict_variables[elem] for elem in subset) >= 1
+        problem += pulp.lpSum(players[player] for player in subset) >= 1; lowBound = 0; upBound = 1
     
     pulp.LpSolverDefault.msg = 0
     problem.solve()
-    
-    hitting_set_solution = {var.name for var in dict_variables.values() if pulp.value(var) >= b**-1}
+    hitting_set_solution = {player.name for player in players.values() if pulp.value(player) >= b}
+    if len(hitting_set_solution) == 0:
+        return []
     return hitting_set_solution
 
 def aprox_hs_by_contlp(subsets, set):
     max_length = max(len(subset) for subset in subsets)
-    result = _aprox_hs_by_contlp(subsets, set, max_length)
+    result = _aprox_hs_by_contlp(subsets, set, 1/max_length)
     return result
+
+def aprox_greedy(subsets, set):
+    aprox_sol = set()
+    missing_sets = {range(len(subsets))}
+    subsets = list(subsets)
+    return _aprox_greedy(subsets, set, aprox_sol, missing_sets)
+
+def _aprox_greedy(subsets, set, aprox_sol, missing_sets):
+    while(not is_solution(aprox_sol, subsets)):
+        player = find_most_frequent_player(missing_sets, subsets)
+        for i in missing_sets: 
+            if has_a_player(subsets[i], player):
+                missing_sets.remove(i)
+        aprox_sol.add(player)
+    return aprox_sol
+
+def find_most_frequent_player(missing_sets, subsets):
+    frequency = dict()
+    for subset in missing_sets:
+        for player in subsets[subset]:
+            frequency[player] = frequency.get(player, 0) + 1
+    most_frequent_player = max(frequency, key=frequency.get)
+    return most_frequent_player

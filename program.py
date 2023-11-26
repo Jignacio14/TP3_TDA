@@ -14,6 +14,7 @@ AUTO_TEST_LINEAL = "auto_lineal"
 EXECUTE_LINEAL = "exec_lineal"
 AUTO_TEST_GREEDY = "auto_greedy"
 EXECUTE_GREEDY = "exec_greedy"
+EXEC_LINEALC = "exec_linealc"
 CLOSE = "close\n"
 
 def read_data_file(file):
@@ -83,6 +84,11 @@ def execute_lineal_programming(file_name: list):
     print(tp3.search_hs_linealp(subsets, a))
     return
 
+def execute_continous_lineal_programming(file_name: list):
+    subsets, a = read_data_file(file_name[0])
+    print(tp3.aprox_hs_by_contlp(subsets, a))
+    return
+
 def execute_greedy(file_name,):
     return
 
@@ -104,6 +110,7 @@ MAP = {
     EXECUTE: execute_backtracking,
     EXECUTE_LINEAL: execute_lineal_programming, 
     EXECUTE_GREEDY: execute_greedy,
+    EXEC_LINEALC: execute_continous_lineal_programming
 }
 
 def program_execution():
