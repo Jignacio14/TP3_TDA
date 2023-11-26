@@ -51,10 +51,10 @@ def _auto_test_volumn(test_files_path, result_files_path, function, flag = True)
             print(f"El resultado del algoritmo fue: {len(result)} y se esperaba {expected_result}", RESET)
             break
         
+        print(GREEN, "TODO OK", RESET, end="\n\n")
         print(f"El obtenido fue conseguido fue: {len(result)}")
         print("La secuencia de jugadores es: ")
         print(result)
-        print(GREEN, "TODO OK", RESET, end="\n\n")
 
 def auto_test_backtracking(files: list):
     if not os.path.exists(files[0]) or not os.path.exists(files[1]):

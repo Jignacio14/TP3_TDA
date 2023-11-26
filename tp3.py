@@ -62,3 +62,23 @@ def search_hs_linealp(subsets, set):
     
     hitting_set_solution = {var.name for var in dict_variables.values() if pulp.value(var) == 1}
     return hitting_set_solution
+
+
+def _aprox_hs_by_contlp(subsets, set, b):
+    dict_variables = {elem: pulp.LpVariable(f"{elem}", cat="Continous") for elem in set}
+
+    problem = pulp.LpProblem("hitting_set_problem", pulp.LpMinimize)
+    problem += pulp.lpSum(dict_variables[elem] for elem in set)
+    for subset in subsets:
+        problem += pulp.lpSum(dict_variables[elem] for elem in subset) >= 1
+    
+    pulp.LpSolverDefault.msg = 0
+    problem.solve()
+    
+    hitting_set_solution = {var.name for var in dict_variables.values() if pulp.value(var) >= b**-1}
+    return hitting_set_solution
+
+def aprox_hs_by_contlp(subsets, set):
+    max_length = max(len(subset) for subset in subsets)
+    result = _aprox_hs_by_contlp(subsets, set, max_length)
+    return result
