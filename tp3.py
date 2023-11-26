@@ -64,13 +64,13 @@ def search_hs_linealp(subsets, set):
     return hitting_set_solution
 
 
-def _aprox_hs_by_contlp(subsets, set, b):
-    players = {player: pulp.LpVariable(f"{player}", cat=pulp.LpContinuous) for player in set}
-
+def _aprox_hs_by_contlp(subsets: set, total_players: set, b: float):
+    players = {player: pulp.LpVariable(f"{player}", lowBound=0, upBound=1, cat=pulp.LpContinuous) for player in total_players}
     problem = pulp.LpProblem("hitting_set_problem_c", pulp.LpMinimize)
-    problem += pulp.lpSum(players[player] for player in set)
+    problem += pulp.lpSum(players[player] for player in total_players)
+
     for subset in subsets:
-        problem += pulp.lpSum(players[player] for player in subset) >= 1; lowBound = 0; upBound = 1
+        problem += pulp.lpSum(players[player] for player in subset) >= 1
     
     pulp.LpSolverDefault.msg = 0
     problem.solve()
@@ -79,18 +79,18 @@ def _aprox_hs_by_contlp(subsets, set, b):
         return []
     return hitting_set_solution
 
-def aprox_hs_by_contlp(subsets, set):
+def aprox_hs_by_contlp(subsets: set, set: set):
     max_length = max(len(subset) for subset in subsets)
     result = _aprox_hs_by_contlp(subsets, set, 1/max_length)
     return result
 
-def aprox_greedy(subsets, a):
+def aprox_greedy(subsets: set, a: set):
     aprox_sol = set()
     missing_sets = set(range(len(subsets)))
     subsets = list(subsets)
     return _aprox_greedy(subsets, aprox_sol, missing_sets)
 
-def _aprox_greedy(subsets, aprox_sol, missing_sets):
+def _aprox_greedy(subsets: list, aprox_sol: set, missing_sets: set):
     while(not is_solution(aprox_sol, subsets)):
         diference = set()
         player = find_most_frequent_player(missing_sets, subsets)
@@ -101,7 +101,7 @@ def _aprox_greedy(subsets, aprox_sol, missing_sets):
         missing_sets.difference_update(diference)
     return aprox_sol
 
-def find_most_frequent_player(missing_sets, subsets):
+def find_most_frequent_player(missing_sets: set, subsets: list):
     frequency = dict()
     for subset_index in missing_sets:
         for player in subsets[subset_index]:
