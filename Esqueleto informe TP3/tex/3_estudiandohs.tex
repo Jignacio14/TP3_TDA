@@ -1,0 +1,76 @@
+\section{Estudiando Hitting Set Problem}
+
+\subsection{Demostrando su pertenencia a NP}
+
+Para demostrar que Hitting Set se encuentra en NP bastaría con tener una solución del problema: un conjunto $H$ y y el set de datos de entrada al mismo, un conjunto de subconjuntos $B = B_1, B_2, ... B_m$ ($B_i \subseteq A \forall i$) de manera que, simplemente, se debe iterar sobre el conjunto de subconjuntos y sobre cada subconjunto validando si alguno de los elementos $b_j \in B_i$ ciertamente pertenece a $H$. En caso de haber probado con todos los elementos de un $B_i$ y ninguno de sus elementos $b_j$ pertenezca a $H$ entonces, la solución brindada no es un Hitting Set, en caso de haber llegado al final entonces dicho conjunto si es un Hitting Set
+
+\subsubsection{Implementación del validador}
+
+\begin{lstlisting}[language=Python, caption= validador, label=python_code]
+def is_solution(hitting_set, subsets):
+    for subset in subsets:
+        flag = False
+        for element in subset:
+            if element in hitting_set: 
+                flag = True
+                break
+        if not flag: return False 
+    return True
+\end{lstlisting}
+
+\subsubsection{Complejidad temporal del validador}
+
+Para verificar finalmente que dicho problema falta con probar que este validador posee tiempo polinomial
+
+Veamos que: 
+
+\begin{itemize}
+    \item Recorrer la lista de subconjuntos es lineal en la cantidad de subconjuntos, dicha cantidad se llamará $m$.
+    \item Recorrer los elementos del subconjunto $B_i$ es lineal en la cantidad de elementos del subconjunto, dicha cantidad se llamará $k$.
+\end{itemize}
+
+Ahora si decimos generalizamos $k$ como el máximo cardinal existente de algún conjunto $B_i$ se puede establecer la siguiente cota:
+
+$$
+    T(n) = O(m \times k)
+$$
+
+Como dicha complejidad es polinomial a $m$ y $k$ entonces se cumple que Hitting Set esta  en NP
+
+\subsection{Demostrando pertenece a NP completo}
+
+Para probar este segmento del informe se debe realizar una reduccion de algun problema NP-Completo conocido a Hitting-Set, en este caso, dicho problema sera Vertex Cover.
+
+En un principio se establecen ambos problemas de decisión: 
+
+\begin{center}
+  \begin{minipage}{0.8\textwidth}
+    \fbox{%
+      \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
+        \textbf{El problema de decisión del vertex cover implica, dado un grafo G y un número k, determinar si existe un vertex cover de tamaño a lo sumo k \\}
+      }%
+    }
+  \end{minipage}
+\end{center}
+
+Por otro lado: 
+
+\begin{center}
+  \begin{minipage}{0.8\textwidth}
+    \fbox{%
+      \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
+        \textbf{El problema de decisión del hitting set implica, sea A un conjunto, B un conjunto de subconjuntos pertenecientes a A, determinar si existe un conjunto H de tamaño al menos k tal que todo subconjunto de B la intersección entre $B_i$ y H no es vacía \\}
+      }%
+    }
+  \end{minipage}
+\end{center}
+
+Entonces veamos la siguiente reducción:
+
+$$
+    \text{Vertex Cover} \leq_p \text{Hitting Set} 
+$$
+
+Sea $G$ un grafo, $V$ su conjunto de vertices y $E$ su conjunto de aristas, entonces se toma $A$ como el conjunto de vertices. Ahora, que sera $B$, en este caso se podria definir como el conjunto de subconjunto de los pares $(v_i, v_j)$ siempre y cuando exista una arista entre dichos vertices, aunque, esto seria simplemente el conjunto de las aristas de $G$
+
+Habiendo establecido lo anterior, se puede observar que si existe un Hitting Set de tamaño k  para los conjuntos $A = V(G)$ y $B = E(G)$ entonces necesariamente existe un vertex cover de tamaño al menos k, por lo tanto, sabiendo que vertex cover es un problema NP-Completo se puede concluir finalmente que Hitting set también es NP-Completo 

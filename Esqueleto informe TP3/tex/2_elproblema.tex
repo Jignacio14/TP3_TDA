@@ -1,0 +1,39 @@
+\section{El problema}
+Scaloni ya está armando la lista de 43 jugadores que van a ir al mundial 2026. 
+Hay mucha presión por parte de la prensa para bajar línea de cuál debería ser 
+el 11 inicial. Lo de siempre. 
+Algunos medios quieren que juegue Roncaglia, otros quieren que juegue 
+Mateo Messi, y así. Cada medio tiene un subconjunto de
+jugadores que quiere que jueguen. A Scaloni esto no le importa, no va a dejar
+que la prensa lo condicione, pero tiene jugadores jóvenes a los que esto
+puede afectarles. 
+
+Justo hay un partido amistoso contra Burkina Faso la semana que viene. Oportunidad
+ideal para poner un equipo que contente a todos, baje la presión y poder 
+aislar al equipo. 
+
+El problema es, ¿cómo elegir el conjunto de jugadores que jueguen ese partido 
+(entre titulares y suplentes que vayan a entrar)? Además, Scaloni quiere poder
+usar ese partido para probar cosas aparte. No puede gastar el amistoso
+para contentar a un periodista mufa que habla mal de Messi, por ejemplo. 
+Quiere definir el conjunto más pequeño de jugadores necesarios para contentarlos 
+y poder seguir con la suya. Con elegir
+un jugador que contente a cada periodista/medio, le es suficiente. 
+
+Ante este problema, Bilardo se sentó con Scaloni para explicarle que en realidad 
+este es un problema conocido (viejo zorro como es, ya se comió todas las operetas 
+de prensa así que se conoce este problema de memoria). Se sirvió una copa de \textit{Gatorei} 
+y le comentó:
+
+Esto no es más que un caso particular del Hitting-Set Problem. El cual es: Dado un conjunto 
+$A$ de $n$ elementos y $m$ subconjuntos $B_1, B_2, ..., B_m$ de $A$
+($B_i \subseteq A \forall i$) , queremos el subconjunto $C \subseteq A$ de menor tamaño tal 
+que $C$ tenga al menos un elemento de cada
+$B_i$ (es decir, $C \cap B_i \neq \emptyset$). En nuestro caso, $A$ son los jugadores 
+convocados, los $B_i$ son los deseos de la
+prensa, y $C$ es el conjunto de jugadores que deberían jugar contra Burkina Faso 
+si o si". 
+
+Bueno, ahora con un poco más claridad en el tema, Scaloni necesita de nuestra 
+ayuda para ver si obtener este subconjunto se puede hacer de forma eficiente 
+(polinomial) o, si no queda otra, con qué alternativas contamos. 
