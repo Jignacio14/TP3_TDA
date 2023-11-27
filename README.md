@@ -33,7 +33,7 @@ Con este comando llamaras a ejecución el algoritmo que mas te guste para resolv
         exec_greedy -> Ejecuta el algoritmo de aproximación greedy
         exec_linealc -> Ejecuta la aproximación por programación lineal
 
-Recorda que tenes que pasar el archivo pillin :) 
+Recorda que tenes que pasar el archivo pillin 
 
 --- 
 
@@ -53,7 +53,7 @@ Este comando lo que realiza es una serie de test en volumen con todos los archiv
 ---
         close 
 
-Porque no puedo ser tan trucho y pedirte un ctrl + c, hasta se despide de ti de manera elegante ;) 
+Porque no puedo ser tan trucho y pedirte un ctrl + c, hasta se despide de ti de manera elegante 
 
 ### Formato archivo de prueba:
 
