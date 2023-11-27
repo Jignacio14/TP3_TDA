@@ -57,40 +57,34 @@ def _auto_test_volumn(test_files_path, result_files_path, function, flag = True)
 
 def auto_test_backtracking(files: list):
     if not os.path.exists(files[0]) or not os.path.exists(files[1]):
-        print("Alguna de las rutas no es valida")
+        print("Some path is not available")
         return 
     _auto_test_volumn(files[0], files[1], tp3.search_for_min_hitting_set)
     return
 
 def auto_test_lineal_programming(files: list):
     if not os.path.exists(files[0]) or not os.path.exists(files[1]):
-        print("Alguna de las rutas no es valida")
+        print("Some path is not available")
         return 
     _auto_test_volumn(files[0], files[1], tp3.search_hs_linealp)
     return
 
-def auto_test_lineal_greedy(files: list):
-    return
-
-def execute_backtracking(file_name: list):
-    subsets, a = read_data_file(file_name[0])
-    print(tp3.search_for_min_hitting_set(subsets, a))
+def execute_algorithm(files: list, function):
+    subsets, a = read_data_file(files[0])
+    print(function(subsets, a))
     return 
 
+def execute_backtracking(file_name: list):
+    return execute_algorithm(file_name, tp3.search_for_min_hitting_set)
+
 def execute_lineal_programming(file_name: list):
-    subsets, a = read_data_file(file_name[0])
-    print(tp3.search_hs_linealp(subsets, a))
-    return
+    return execute_algorithm(file_name, tp3.search_hs_linealp)
 
 def execute_continous_lineal_programming(file_name: list):
-    subsets, a = read_data_file(file_name[0])
-    print(tp3.aprox_hs_by_contlp(subsets, a))
-    return
+    return execute_algorithm(file_name, tp3.aprox_hs_by_contlp)
 
 def execute_greedy(file_name: list):
-    subsets, a = read_data_file(file_name[0])
-    print(tp3.aprox_greedy(subsets, a))
-    return
+    return execute_algorithm(file_name, tp3.aprox_hs_by_greedy)
 
 def show_input_error():
     print("No has pasado los parametros solicitados")

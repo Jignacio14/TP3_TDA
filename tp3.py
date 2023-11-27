@@ -80,11 +80,13 @@ def _aprox_hs_by_contlp(subsets: set, total_players: set, b: float):
     return hitting_set_solution
 
 def aprox_hs_by_contlp(subsets: set, set: set):
+    if (len(subsets) == 0): return []
     max_length = max(len(subset) for subset in subsets)
     result = _aprox_hs_by_contlp(subsets, set, 1/max_length)
     return result
 
-def aprox_greedy(subsets: set, a: set):
+def aprox_hs_by_greedy(subsets, a):
+    if (len(subsets) == 0): return []
     aprox_sol = set()
     missing_sets = set(range(len(subsets)))
     subsets = list(subsets)
