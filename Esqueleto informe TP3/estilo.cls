@@ -104,13 +104,13 @@
 \\[1cm]
 	\textsc{\Large Teoría de Algoritmos}\\           % Materia
 	\textsc{\small (75.29) Curso Buchwald - Genender}\\[0.4cm]    % Subtítulo materia
-	{ \huge \bfseries Trabajo Práctico 3: \\ Problemas NP-Completos}\\[0.3cm]      % Título
+	{ \huge \bfseries Trabajo Práctico 3: \\ Backtracking}\\[0.3cm]      % Título
 	\andreasline \\[0.2cm]
 	{\large \today  \\[0.4cm]} % Fecha
 
     \fbox
     {
-	\begin{minipage}{0.4\textwidth}
+	\begin{minipage}{0.5\textwidth}
 		\begin{center}
             \large{Castro Martínez José Ignacio \\ 106957} % Integrante 1
 		\end{center}
@@ -121,20 +121,9 @@
 
     \fbox
     {
-	\begin{minipage}{0.4\textwidth}
+	\begin{minipage}{0.5\textwidth}
 		\begin{center}
             \large{Makkos Juan Sebastian \\ 106229} % Integrante 2
-		\end{center}
-	\end{minipage}
-    }
-
-    \hfill
-
-    \fbox
-    {
-	\begin{minipage}{0.4\textwidth}
-		\begin{center}
-            \large{Xu Facundo \\ 108295} % Integrante 3
 		\end{center}
 	\end{minipage}
     }
