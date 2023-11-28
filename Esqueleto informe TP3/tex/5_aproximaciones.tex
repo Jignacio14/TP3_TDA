@@ -72,15 +72,53 @@ Donde $k$ se puede estimar como el cardinal del mayor subconjunto perteneciente 
 \subsection{Solución por programación lineal}
 
 Para construir esta aproximación se relajan las reglas implementadas en el caso de programación lineal entera y se permite que los valores de los jugadores varíen entre 0 y 1. Por lo que las ecuaciones en este caso serían:
-
 \begin{align}
   \sum_{b_j \in B_i} b_j &\geq 1 \quad \forall B_i \in B \\
   \sum_{b_j \in B_i} b_j &\geq 1 \quad \forall B_i \in B \\
   b_j &\in [0,1] 
 \end{align}
+\subsubsection{Complejidad temporal de la aproximación}
+Debido a que se esta aproximación se realiza aplicando programación lineal, es claro que, para resolver las ecuaciones planteadas se utiliza el algoritmo Simplex, el cual, se encuentra acotado como:
+\begin{align}
+    T(n) = O(n^9)
+\end{align}
+Si bien es cierto que se pueden dar determinadas condiciones para que la complejidad temporal de la resolución aproximada sea menor a la anteriormente mencionada, no se puede descartar que algoritmo Simplex que es el motor de la solución posee la cota superior dicha 
 \subsubsection{Clasificación de la aproximación}
+Definamos $M$ como el subconjunto con la cantidad máxima de jugadores y definamos $|M| = b$ si se desean relajar las ecuaciones y establecer que dentro de las respuesta vayan solo los elementos cuya respuesta en la solución es: $1/b$. En el peor de los casos para todos los elementos de ese subconjunto todos los valores en la ecuación pueden tomar $1/b$, aunque también, eso quiere decir que todos los valores estarían incluidos. Como $1/b$ es un valor pequeño en comparación a los posibles valores que puedan tomar los otros jugadores dentro de sus ecuaciones, recordar que la suma de jugadores por cada subconjunto debe valer al menos uno, para otros conjuntos es probable también se incluyan otros valores que no son necesarios en la respuesta óptima. Por lo tanto, volviendo a $|M|$, se observa que como mucho necesita un representante, es cierto que, pueden existir dentro de $M$ la presencia de otros jugadores esenciales en la respuesta óptima pero en un principio en el peor caso se incluyen $b - 1$ jugadores no esenciales, entonces, esto es una $b - 1$ aproximación
+\subsubsection{Una muestra de r(A)}
 
-TO-DO
+A continuación se toma una muestra aleatoria de los $r(A)$ de la solución
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc}
+    \hline
+    \textbf{m} & \textbf{r(a)} \\
+    \hline
+    104 & 1.875000 \\
+    15 & 1.000000 \\
+    152 & 1.181818 \\
+    196 & 1.700000 \\
+    150 & 1.300000 \\
+    16 & 1.000000 \\
+    161 & 1.000000 \\
+    66 & 1.000000 \\
+    27 & 1.400000 \\
+    95 & 1.000000 \\
+    115 & 2.142857 \\
+    153 & 1.076923 \\
+    92 & 2.125000 \\
+    112 & 1.900000 \\
+    35 & 1.000000 \\
+    135 & 1.000000 \\
+    45 & 3.000000 \\
+    96 & 2.000000 \\
+    19 & 3.000000 \\
+    163 & 1.600000 \\
+    \hline
+    \end{tabular}
+    \caption{Descripción de la tabla.}
+    \label{tabla:resultados}
+\end{table}
 
 \subsection{Medición de las aproximaciones}
 \begin{figure}[H]
@@ -115,6 +153,7 @@ En este gráfico se analizan las distancias con el óptimo real de ambas aproxim
     \centering
     \includegraphics[width=1\textwidth]{graficos/distanciaaloptimo.png}
 \end{figure}
+
 \subsection{Mediciones en volumen de las aproximaciones}
 \begin{figure}[H]
     \begin{minipage}{0.5\textwidth}
@@ -131,3 +170,11 @@ En este gráfico se analizan las distancias con el óptimo real de ambas aproxim
     \end{minipage}
 \end{figure}
 \section{Conclusión}
+
+En conclusión se analizo en profundidad un análisis y diversas resoluciones del problema de conjunto de impacto, construyendo tanto estrategias que permitían obtener una solución exacta como aproximaciones diversas aproximaciones que varían en comportamiento y complejidad temporal es importante destacar lo siguiente:
+
+\begin{itemize}
+    \item La aproximación por programación lineal tuvo menor variabilidad entre los tiempos de ejecución que la solución aproximada por una estrategia greedy a pesar de tener una complejidad temporal menor\\
+    \item La aproximación greedy genera óptimos más cercanos a los reales para cualquier valor tamaño del conjunto de subconjuntos siendo pues que para los datos utilizados para resolver todos los algoritmos implementados la mayor distancia al óptimo fue 6 \\
+    \item La solución por programación lineal entera encuentra con los mejores tiempos entre todos los algoritmos la respuesta \\ 
+\end{itemize}
