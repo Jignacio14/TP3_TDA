@@ -1,0 +1,11 @@
+5.txt: 2
+7.txt: 2
+10_pocos.txt: 3
+10_varios.txt: 6 
+10_todos.txt: 10
+15.txt: 4
+20.txt: 5
+50.txt: 6
+75.txt: 8
+100.txt: 9
+200.txt: 9
